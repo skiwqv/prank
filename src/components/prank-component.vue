@@ -3,19 +3,20 @@
         <p v-if="sergey != true" class="timer">{{ formatedTime }}</p>
         <button v-if="sergey != true" class="scary-button" @click="startTimer">ТЫ ГОТОВ?!</button>
         <div class="video-container" v-if="sergey">
-            <video class="video" autoplay=" true" ref="videoPlayer" :src="sergVIdeo" type="video/mp4" />
+            <video class="video" src="../assets/video/Untitled.mp4" type="video/mp4" autoplay loop muted></video>
+            <audio loop class="video" autoplay=" true" ref="videoPlayer" :src="sergVIdeo" type="video/mp4" />
         </div>
     </div>
 </template>
 
 <script setup>
-import sergVIdeo from '@/assets/video/Untitled.mp4'
+import sergVIdeo from '@/assets/seraudio.mp3'
+const videoPlayer = ref(null)
 import { ref, computed } from 'vue';
 let counter = ref(5)
 let timer = ref(null)
 let sergey = ref(false)
 let startSergey = ref(false)
-const videoPlayer = ref(null)
 
 let formatedTime = computed(() => {
     const minutes = Math.floor(counter.value / 60);
@@ -58,17 +59,12 @@ function summonRyazanov() {
 
 .timer {
     font-family: 'Creepster', cursive;
-    /* Используем шрифт, который может создать жуткий вид */
     font-size: 24px;
     font-weight: bold;
     color: #8b0000;
-    /* Красный цвет текста */
     text-shadow: 2px 2px 4px #000;
-    /* Тень текста */
     letter-spacing: 2px;
-    /* Расстояние между буквами */
     text-transform: uppercase;
-    /* Преобразование текста в верхний регистр */
     font-size: 62px;
     position: relative;
 }
@@ -112,12 +108,34 @@ function summonRyazanov() {
 }
 
 
-/* Стили для устройств с шириной экрана от 769px и выше (ПК и большие экраны) */
-@media (max-width: 769px) {
+@media (min-width: 770px) {
 
     .video-container {
         width: 100vw;
         position: relative;
+        z-index: 999;
+        height: 100vh;
+    }
+
+    .video {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 999;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+@media (max-width: 769px) {
+
+    .video-container {
+        background: url('../assets/video/Untitled.mp4');
+        width: 100vw;
+        background-size: 100%;
+        background-position: center;
+        position: absolute;
         height: 100vh;
     }
 
