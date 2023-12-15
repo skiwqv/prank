@@ -131,7 +131,6 @@ function summonRyazanov() {
 @media (max-width: 769px) {
 
     .video-container {
-        background: url('../assets/video/Untitled.mp4');
         width: 100vw;
         background-size: 100%;
         background-position: center;
